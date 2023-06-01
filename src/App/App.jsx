@@ -4,8 +4,11 @@ import { Section } from "../components/section/Section";
 import  ContactForm  from '../components/ContactForm/ContactForm';
 import { Filter } from '../components/Filter/Filter';
 import { ContactList } from '../components/ContactList/ContactList';
+import { useDispatch, useSelector } from 'react-redux';
 import Notiflix from 'notiflix';
 import { useLocalStorage } from 'hooks/useLocalStorage';
+import { deleteContact } from 'redux/contactsSlice';
+import { filterContacts } from 'redux/filterSlice';
 
 
 const DEFAULT_CONTACTS = [
@@ -16,25 +19,32 @@ const DEFAULT_CONTACTS = [
 ]
 
 const App = () => {
-  const [contacts, setContacts] = useLocalStorage('contacts', DEFAULT_CONTACTS);
-  const [filter, setFilter] = useState('');
-  const [isChecked, setIsChecked] = useState(null)
+  const contacts = useSelector(state => state.contacts)
+
+  const filter = useSelector(state => state.filter)
+  // const isChecked = useSelector(state => state.contacts.contacts)
+
+
+  // const [contacts, setContacts] = useLocalStorage('contacts', DEFAULT_CONTACTS);
+  // const [filter, setFilter] = useState('');
+  // const [isChecked, setIsChecked] = useState(null)
+  const dispatch = useDispatch();
 
 
 
-  const addContact = (newContact) => {
-    const {name, number} = newContact
-    if (contacts.find((contact) => contact.name.toLowerCase() === newContact.name.toLowerCase())) {
-      Notiflix.Notify.failure(`${name} is already in contacts.`);
-      return;
-    } else if (contacts.find((contact) => contact.number.toString() === number)) {
-      Notiflix.Notify.failure(`${number} is already in contacts.`);
-      return;
-    }
+  // const addContact = (newContact) => {
+  //   const {name, number} = newContact
+  //   if (contacts.find((contact) => contact.name.toLowerCase() === newContact.name.toLowerCase())) {
+  //     Notiflix.Notify.failure(`${name} is already in contacts.`);
+  //     return;
+  //   } else if (contacts.find((contact) => contact.number.toString() === number)) {
+  //     Notiflix.Notify.failure(`${number} is already in contacts.`);
+  //     return;
+  //   }
 
-    setContacts((prevContacts) => [newContact, ...prevContacts]);
-    Notiflix.Notify.success(`${name} added.`);
-  };
+  //   // setContacts((prevContacts) => [newContact, ...prevContacts]);
+  //   Notiflix.Notify.success(`${name} added.`);
+  // };
 
   const deleteContact = (contactId, contactName) => {
    
@@ -42,52 +52,54 @@ const App = () => {
     setTimeout(() => {
       const shouldDelete = window.confirm(`Are you sure you want to delete ${contactName}?`);
       if (shouldDelete) {
-        setContacts((prevContacts) => prevContacts.filter((contact) => contact.id !== contactId));
+        dispatch(deleteContact(contactId))
+        // setContacts((prevContacts) => prevContacts.filter((contact) => contact.id !== contactId));
         Notiflix.Notify.warning(`${contactName} deleted.`);
       }
     }, 700);
           
-    // buttonRef.current.blur(); // Manually blur the button
   };
+
+  console.log(contacts);
+
+
 
   const handleFilterChange = (e) => {
-    setFilter(e.currentTarget.value);
+
+    // setFilter(e.currentTarget.value);
+    dispatch(filterContacts())
   };
 
-  const filteredContacts = contacts.filter(
-    (contact) =>
-      contact.name.toLowerCase().includes(filter.toLowerCase()) ||
-      contact.number.toString().includes(filter)
-  );
+ 
 
-  const handleEditcontact = (updatedContact) => {
-    console.log(updatedContact);
-    const {id, name, number} = updatedContact
+  // const handleEditcontact = (updatedContact) => {
+  //   console.log(updatedContact);
+  //   const {id, name, number} = updatedContact
 
-    const previousContact = contacts.filter(contact => contact.id === id)
-    console.log('previousContact' ,previousContact);
+  //   const previousContact = contacts.filter(contact => contact.id === id)
+  //   console.log('previousContact' ,previousContact);
 
-    const allExeptUpdated = contacts.filter(contact => contact.id !== id)
-    console.log('allExeptUpdated', allExeptUpdated);
+  //   const allExeptUpdated = contacts.filter(contact => contact.id !== id)
+  //   console.log('allExeptUpdated', allExeptUpdated);
 
-    if (allExeptUpdated.find((contact) => contact.name.toLowerCase() === name.toLowerCase())) {
-      Notiflix.Notify.failure(`${name} is already in contacts.`);
-      // setContacts([...contacts] )
-      setIsChecked(false)
-      return;
+  //   if (allExeptUpdated.find((contact) => contact.name.toLowerCase() === name.toLowerCase())) {
+  //     Notiflix.Notify.failure(`${name} is already in contacts.`);
+  //     // setContacts([...contacts] )
+  //     // setIsChecked(false)
+  //     return;
 
-    } else if (allExeptUpdated.find((contact) => contact.number.toString() === number)) {
-      Notiflix.Notify.failure(`${number} is already in contacts.`);
-      setIsChecked(false)
-      return;
-    }
-    setIsChecked(true)
+  //   } else if (allExeptUpdated.find((contact) => contact.number.toString() === number)) {
+  //     Notiflix.Notify.failure(`${number} is already in contacts.`);
+  //     // setIsChecked(false)
+  //     return;
+  //   }
+  //   // setIsChecked(true)
 
-    setContacts([updatedContact, ...allExeptUpdated] )
+  //   // setContacts([updatedContact, ...allExeptUpdated] )
 
-    Notiflix.Notify.success(`${previousContact[0].name} updated.`);
+  //   Notiflix.Notify.success(`${previousContact[0].name} updated.`);
 
-  }
+  // }
 
 
   return (
@@ -95,19 +107,22 @@ const App = () => {
     <Container>
       <Section title="Phonebook">
         <ContactForm 
-         onSubmit={addContact} 
+        //  onSubmit={addContact} 
       
         />
       </Section>
 
       <Section title="Contacts">
-        <Filter value={filter} onFilterChange={handleFilterChange} dis={contacts.length === 0} />
+        <Filter value={filter}
+        // onFilterChange={handleFilterChange} 
+        // dis={contacts.length === 0}
+         />
         {contacts.length > 0 && (
           <ContactList 
-           options={filteredContacts}
+          //  options={filteredContacts}
            onDeleteContact={deleteContact} 
-           onEditContact ={handleEditcontact}
-           onItemStateUpdate ={isChecked}
+          //  onEditContact ={handleEditcontact}
+          //  onItemStateUpdate ={isChecked}
            />
         )}
       </Section>

@@ -1,36 +1,59 @@
 import { PropTypes } from 'prop-types';
-import React, { useState} from 'react';
-import { nanoid } from 'nanoid';
+
 import { Input, Form, Label, ContactFormBtn } from './ContactForm.styled';
 import { iconReactHook } from 'utils/svgIcons';
+import { useSelector, useDispatch } from 'react-redux';
+import { addContact , updateContact} from 'redux/contactsSlice';
+import { nanoid } from 'nanoid';
+
 
 
 const ContactForm = ({ onSubmit }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  // const [name, setName] = useState('');
+  // const [number, setNumber] = useState('');
 
-  // const buttonRef = useRef(null);
+  const name = useSelector(state => {
+  console.log(state)
+  return state.contacts.name} )
+  const number= useSelector(state => state.contacts.number )
+  const dispatch = useDispatch()
 
-  const handleChange = (e) => {
-    const { name, value } = e.currentTarget;
-    if (name === 'name') {
-      setName(value);
-    } else if (name === 'number') {
-      setNumber(value);
-    }
-  };
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.currentTarget;
+
+  //   const updatedContact = {
+  //     name,
+  //     number,
+  //     [name]: value,
+  //   };
+  //   // dispatch(updateContact(updatedContact));
+  //   // if (name === 'name') {
+  //   //   setName(value);
+  //   // } else if (name === 'number') {
+  //   //   setNumber(value);
+  //   // }
+  // };
 
   const handleSubmit = (e) => {
   
     e.preventDefault();
-    onSubmit({ id: nanoid(), name, number });
-    resetForm();
+    const {name, number} = e.target
+    const data  = {
+      id: nanoid(),
+      name: name.value,
+      number: number.value,
+    }
+    console.log(data)
+
+
+    dispatch(addContact(data))
+    // resetForm();
   };
 
-  const resetForm = () => {
-    setName('');
-    setNumber('');
-  };
+  // const resetForm = () => {
+
+  // };
 
   return (
     <Form autoComplete="off" onSubmit={handleSubmit}>
@@ -41,9 +64,9 @@ const ContactForm = ({ onSubmit }) => {
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          value={name}
+          // value={name}
           required
-          onChange={handleChange}
+          // onChange={handleChange}
         />
       </Label>
       <Label>
@@ -53,9 +76,9 @@ const ContactForm = ({ onSubmit }) => {
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          value={number}
+          // value={number}
           required
-          onChange={handleChange}
+          // onChange={handleChange}
         />
       </Label>
       <ContactFormBtn 
@@ -69,7 +92,7 @@ const ContactForm = ({ onSubmit }) => {
 
 export default ContactForm;
 
-  ContactForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    onChange: PropTypes.func,
-}
+//   ContactForm.propTypes = {
+//     onSubmit: PropTypes.func.isRequired,
+//     onChange: PropTypes.func,
+// }
