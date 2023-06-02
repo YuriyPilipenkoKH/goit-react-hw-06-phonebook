@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-
 export  const editSlice = createSlice({
 
     name: 'edit',
@@ -18,9 +17,6 @@ export  const editSlice = createSlice({
         state[field] = value;
        
         }},
-
-
-
 
 }
 

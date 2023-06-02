@@ -3,13 +3,7 @@ import { persistedContactsReducer } from "./contactsSlice";
 import { filterReducer } from "./filterSlice";
 import { editReducer } from "./editSlice";
 import { formReducer } from "./formSlice";
-import { persistStore,    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,}
-     from "redux-persist";
+import { persistStore, FLUSH, REHYDRATE, PERSIST, PURGE, PAUSE,  REGISTER,}  from "redux-persist";
 
 export const store = configureStore({
 

@@ -7,13 +7,11 @@ import { updateField, resetForm } from 'redux/formSlice';
 import Notiflix from 'notiflix';
 
 
-const ContactForm = ({ onSubmit }) => {
-
+const ContactForm = () => {
 
   const contacts = useSelector(state =>  {
    return state.contacts.contactsList
   })
-
 
   const { name, number } = useSelector((state) => state.form);
   const dispatch = useDispatch()
@@ -24,17 +22,17 @@ const ContactForm = ({ onSubmit }) => {
     dispatch(updateField({ field: name, value }));
   };
 
-
   const handleSubmit = (e) => {
   
     e.preventDefault();
-    // const {name, number} = e.target
+
     const newContact  = {
       id: nanoid(),
       name: name,
       number: number,
     }
-    console.log(newContact)
+
+
     if (contacts.find((contact) => contact.name.toLowerCase() === newContact.name.toLowerCase())) {
       Notiflix.Notify.failure(`${name} is already in contacts.`);
       return;

@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Notiflix from "notiflix";
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-// import { nanoid } from "nanoid";
+
 
 // const DEFAULT_CONTACTS = [
 //   {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
@@ -16,51 +17,44 @@ export const contactsSlice =  createSlice({
     name: 'contacts',
     initialState,
 
-
     reducers: {
         addContact: {
 
           reducer(state, action) {
-        
-          //  
-          //  return [...state.contactsList, action.payload]
          state.contactsList.push(action.payload);
           },
         },
 
        deleteContact: {
-        reducer(state, action) {
 
-         return state.filter(contact => contact.id !== action.payload)
+        reducer(state, action) {
+          state.contactsList = state.contactsList.filter(contact => contact.id !== action.payload);
         }
-       
        },
 
        editContact:{
+
         reducer(state, action) {
-         
-          const { id} = action.payload;  
+  
+          const { id, name, number} = action.payload;  
           const updatedContact = action.payload;
-          const newState = [...state.contacts]
-          console.log(newState);
+          const allExeptUpdated = state.contactsList.filter(contact => contact.id !== id);
+  
+          if (allExeptUpdated.find((contact) => contact.name.toLowerCase() === name.toLowerCase())){
+            Notiflix.Notify.failure(`${name} is already in contacts.`);
 
-          // const contact = newState.find(contact => contact.id === id);
-          const allcontacts = newState.find(contact => contact.id !== id);
+          return ;
+          }
 
-          console.log(allcontacts);
+          else if (allExeptUpdated.find((contact) => contact.number.toString() === number)) {
+            Notiflix.Notify.failure(`${number} is already in contacts.`);
 
-          return [...allcontacts, updatedContact]
+          return ;
+          }
 
-          // const index = state.contacts.findIndex((contact) => contact.id === updatedContact.id);
-          // if (index !== -1) {
-          //   state.contacts[index] = updatedContact;
+          state.contactsList = [...allExeptUpdated, updatedContact]
+          Notiflix.Notify.success(`Contact ${name} updated.`);
 
-            // const { id, name, number } = action.payload;   
-            // const contact = state.contacts.find(contact => contact.id === id);
-            // if (contact) {
-            //   contact.name = name;
-            //   contact.number = number;
-          //   }
         }
         },
     }
