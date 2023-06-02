@@ -1,10 +1,12 @@
-import { PropTypes } from 'prop-types';
+// import { PropTypes } from 'prop-types';
 
 import { Input, Form, Label, ContactFormBtn } from './ContactForm.styled';
 import { iconReactHook } from 'utils/svgIcons';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact , updateContact} from 'redux/contactsSlice';
+import { addContact } from 'redux/contactsSlice';
 import { nanoid } from 'nanoid';
+import { updateField, resetForm } from 'redux/formSlice';
+import Notiflix from 'notiflix';
 
 
 
@@ -12,48 +14,39 @@ const ContactForm = ({ onSubmit }) => {
   // const [name, setName] = useState('');
   // const [number, setNumber] = useState('');
 
-  const name = useSelector(state => {
-  console.log(state)
-  return state.contacts.name} )
-  const number= useSelector(state => state.contacts.number )
+  const contacts = useSelector(state =>  state.contacts)
+  const { name, number } = useSelector((state) => state.form);
   const dispatch = useDispatch()
 
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.currentTarget;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    dispatch(updateField({ field: name, value }));
+  };
 
-  //   const updatedContact = {
-  //     name,
-  //     number,
-  //     [name]: value,
-  //   };
-  //   // dispatch(updateContact(updatedContact));
-  //   // if (name === 'name') {
-  //   //   setName(value);
-  //   // } else if (name === 'number') {
-  //   //   setNumber(value);
-  //   // }
-  // };
 
   const handleSubmit = (e) => {
   
     e.preventDefault();
     const {name, number} = e.target
-    const data  = {
+    const newContact  = {
       id: nanoid(),
       name: name.value,
       number: number.value,
     }
-    console.log(data)
+    console.log(newContact)
+    if (contacts.find((contact) => contact.name.toLowerCase() === newContact.name.toLowerCase())) {
+      Notiflix.Notify.failure(`${name.value} is already in contacts.`);
+      return;
+    } else if (contacts.find((contact) => contact.number.toString() === number.value)) {
+      Notiflix.Notify.failure(`${number.value} is already in contacts.`);
+      return;
+    }
 
-
-    dispatch(addContact(data))
-    // resetForm();
+    dispatch(addContact(newContact))
+    dispatch(resetForm()); // Reset the form after submission
   };
 
-  // const resetForm = () => {
-
-  // };
 
   return (
     <Form autoComplete="off" onSubmit={handleSubmit}>
@@ -64,9 +57,9 @@ const ContactForm = ({ onSubmit }) => {
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          // value={name}
+          value={name}
           required
-          // onChange={handleChange}
+          onChange={handleChange}
         />
       </Label>
       <Label>
@@ -76,9 +69,9 @@ const ContactForm = ({ onSubmit }) => {
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          // value={number}
+          value={number}
           required
-          // onChange={handleChange}
+          onChange={handleChange}
         />
       </Label>
       <ContactFormBtn 

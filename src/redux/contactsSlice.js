@@ -12,41 +12,32 @@ export const contactsSlice =  createSlice({
     name: 'contacts',
     initialState: DEFAULT_CONTACTS,
 
+
     reducers: {
         addContact: {
           reducer(state, action) {
-        
-            console.log(action)
            return [...state, action.payload]
-      
           },
         },
 
-
        deleteContact: {
         reducer(state, action) {
+
          return state.filter(contact => contact.id !== action.payload)
         }
        
-      },
+       },
 
-      updateContact(state, action) {
+       updateContact:{
+       reducer(state, action) {
         const { id, name, number } = action.payload;
         const contact = state.contacts.find(contact => contact.id === id);
         if (contact) {
           contact.name = name;
           contact.number = number;
         }
+       }
       },
-
-      // toggleEdit(state, action) {
-      //   const { id } = action.payload;
-      //   const contact = state.contacts.find(contact => contact.id === id);
-      //   if (contact) {
-      //     contact.isEdit = !contact.isEdit;
-      //   }
-      // },
-        
     }
 })
 

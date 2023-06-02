@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, updateContact} from 'redux/contactsSlice';
 import { toggleEdit, updateValue } from 'redux/editSlice';
 import { BtnDelete, BtnEdit, BtnWrapper, EditWrapper, ItemCard, ListItem } from 'components/ContactList/ContactList.styled';
+import Notiflix from 'notiflix';
 
 export default function ContactListItem({ contact }) {
   const { id, name, number } = contact;
   const isEdit = useSelector(state => state.edit.isEdit )
-  const nick = useSelector(state => state.edit.nick)
-  const phone = useSelector(state => state.edit.phone)
-
-
+  // const nick = useSelector(state => state.edit.nick)
+  // const phone = useSelector(state => state.edit.phone)
   const dispatch = useDispatch();
 
   const editContact = () => {
@@ -30,7 +29,13 @@ export default function ContactListItem({ contact }) {
   };
 
   const handleDelete = () => {
-    dispatch(deleteContact(id));
+
+    const shouldDelete = window.confirm(`Are you sure you want to delete ${name}?`);
+
+    if (shouldDelete) {
+      dispatch(deleteContact(id))
+      Notiflix.Notify.warning(`${name} deleted.`);
+    }
   };
 
   const handleChnge = (e) => {

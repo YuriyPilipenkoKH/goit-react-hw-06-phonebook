@@ -1,7 +1,7 @@
 import { Input } from '../ContactForm/ContactForm.styled';
-import { PropTypes } from 'prop-types';
+// import { PropTypes } from 'prop-types';
 import { FilterLabel } from './Filter.styled';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { filterContacts } from 'redux/filterSlice';
 
 export const Filter = ({ value, onFilterChange, dis }) => {
