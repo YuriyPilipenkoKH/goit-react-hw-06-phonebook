@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteContact, editContact} from 'redux/contactsSlice';
 import { BtnDelete, BtnEdit, BtnWrapper, EditWrapper, ItemCard, ListItem } from 'components/ContactList/ContactList.styled';
-import Notiflix from 'notiflix';
 import { useState } from 'react';
+import { confirmDelete, confirmUpdate } from 'utils/notifier';
 
 
 
@@ -29,20 +29,29 @@ export default function ContactListItem({ contact }) {
         name: nick,
         number: phone,
       };
-      window.confirm(`Are you sure you want to update ${name}?`) 
-      dispatch(editContact(updatedContact));
+      // window.confirm(`Are you sure you want to update ${name}?`) 
+
+confirmUpdate(`Are you sure you want to update ${name}?`, name)
+  .then(() => {
+    dispatch(editContact(updatedContact));
+  })
+  .catch(() => {
+    // Handle cancellation or rejection
+  });
 
     }
   };
 
   const handleDelete = () => {
 
-    const shouldDelete = window.confirm(`Are you sure you want to delete ${name}?`);
+    confirmDelete(`Are you sure you want to delete ${name}?`, name)
+  .then(() => {
+    dispatch(deleteContact(id))
+  })
+  .catch(() => {
+    // Handle cancellation or rejection
+  });
 
-    if (shouldDelete) {
-      dispatch(deleteContact(id))
-      Notiflix.Notify.warning(`${name} deleted.`);
-    }
   };
 
   // const handleChange = (e) => {

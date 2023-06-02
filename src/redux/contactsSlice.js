@@ -53,7 +53,7 @@ export const contactsSlice =  createSlice({
           }
 
           state.contactsList = [...allExeptUpdated, updatedContact]
-          Notiflix.Notify.success(`Contact ${name} updated.`);
+          // Notiflix.Notify.success(`Contact ${name} updated.`);
 
         }
         },
