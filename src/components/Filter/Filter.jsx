@@ -1,26 +1,23 @@
 import { Input } from '../ContactForm/ContactForm.styled';
-// import { PropTypes } from 'prop-types';
 import { FilterLabel } from './Filter.styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { filterContacts } from 'redux/filterSlice';
 
-export const Filter = ({ value, onFilterChange, dis }) => {
+export const Filter = () => {
   const dispatch = useDispatch()
-
+  const contacts = useSelector(state =>  state.contacts)
  
-
   return(
     <>
     <FilterLabel>
-      {dis 
+      {contacts.length === 0 
       ? 'List is empty . . .'
       : 'Find contacts by name'}
       <Input
         className='filter__field'
         type="text"
-        // value={value}
         onChange={(e) => dispatch(filterContacts(e.target.value))}
-        // disabled={dis}
+        disabled={contacts.length === 0}
  
       />
     </FilterLabel>
@@ -30,7 +27,3 @@ export const Filter = ({ value, onFilterChange, dis }) => {
 
 }
 
-// Filter.propTypes = {
-//   value: PropTypes.string,
-//   onFilterChange: PropTypes.func,
-// };

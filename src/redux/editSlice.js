@@ -7,19 +7,19 @@ export  const editSlice = createSlice({
     name: 'edit',
     initialState: {
      
-        isEdit: false,
         nick : '',
         phone: '',
     },
     reducers: {
-        toggleEdit(state, action) {
-            
-        state.isEdit = !state.isEdit
-          },
 
-     updateValue(state, action) {
-        state.nick = action.payload
-     }
+       updateValue:{
+       reducer(state, action)  {
+        const { field, value } = action.payload;
+        state[field] = value;
+       
+        }},
+
+
 
 
 }

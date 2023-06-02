@@ -12,7 +12,7 @@ const App = () => {
   const contacts = useSelector(state => {
     console.log(state)
     return state.contacts})
-  const filter = useSelector(state => state.filter)
+
   // const isChecked = useSelector(state => state.contacts.contacts)
 
   // const [filter, setFilter] = useState('');
@@ -71,10 +71,8 @@ const App = () => {
       </Section>
 
       <Section title="Contacts">
-        <Filter value={filter}
-        // dis={contacts.length === 0}
-         />
-        {contacts.length > 0 && (
+        <Filter />
+        {contacts.contactsList.length > 0 && (
           <ContactList 
           //  onItemStateUpdate ={isChecked}
            />

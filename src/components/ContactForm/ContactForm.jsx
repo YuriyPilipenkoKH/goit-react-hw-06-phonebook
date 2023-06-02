@@ -1,5 +1,3 @@
-// import { PropTypes } from 'prop-types';
-
 import { Input, Form, Label, ContactFormBtn } from './ContactForm.styled';
 import { iconReactHook } from 'utils/svgIcons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,12 +7,14 @@ import { updateField, resetForm } from 'redux/formSlice';
 import Notiflix from 'notiflix';
 
 
-
 const ContactForm = ({ onSubmit }) => {
-  // const [name, setName] = useState('');
-  // const [number, setNumber] = useState('');
 
-  const contacts = useSelector(state =>  state.contacts)
+
+  const contacts = useSelector(state =>  {
+   return state.contacts.contactsList
+  })
+
+
   const { name, number } = useSelector((state) => state.form);
   const dispatch = useDispatch()
 
@@ -28,18 +28,18 @@ const ContactForm = ({ onSubmit }) => {
   const handleSubmit = (e) => {
   
     e.preventDefault();
-    const {name, number} = e.target
+    // const {name, number} = e.target
     const newContact  = {
       id: nanoid(),
-      name: name.value,
-      number: number.value,
+      name: name,
+      number: number,
     }
     console.log(newContact)
     if (contacts.find((contact) => contact.name.toLowerCase() === newContact.name.toLowerCase())) {
-      Notiflix.Notify.failure(`${name.value} is already in contacts.`);
+      Notiflix.Notify.failure(`${name} is already in contacts.`);
       return;
-    } else if (contacts.find((contact) => contact.number.toString() === number.value)) {
-      Notiflix.Notify.failure(`${number.value} is already in contacts.`);
+    } else if (contacts.find((contact) => contact.number.toString() === number)) {
+      Notiflix.Notify.failure(`${number} is already in contacts.`);
       return;
     }
 
@@ -85,7 +85,3 @@ const ContactForm = ({ onSubmit }) => {
 
 export default ContactForm;
 
-//   ContactForm.propTypes = {
-//     onSubmit: PropTypes.func.isRequired,
-//     onChange: PropTypes.func,
-// }
