@@ -17,7 +17,6 @@ export  const editSlice = createSlice({
         state[field] = value;
        
         }},
-
 }
 
 })

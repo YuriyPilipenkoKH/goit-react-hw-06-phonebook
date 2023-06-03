@@ -4,6 +4,8 @@ import { deleteContact, editContact} from 'redux/contactsSlice';
 import { BtnDelete, BtnEdit, BtnWrapper, EditWrapper, ItemCard, ListItem } from 'components/ContactList/ContactList.styled';
 import { useState } from 'react';
 import { confirmDelete, confirmUpdate } from 'utils/notifier';
+import { useSelector } from 'react-redux';
+import Notiflix from 'notiflix';
 
 
 
@@ -17,6 +19,8 @@ export default function ContactListItem({ contact }) {
   const [phone, setPhone] = useState(number)
   const dispatch = useDispatch();
 
+  const contactsList  = useSelector(state => state.contacts.contactsList )
+  console.log(contactsList)
 
   const handleEdit = () => {
     setIsEdit(prev => !prev )
@@ -28,6 +32,23 @@ export default function ContactListItem({ contact }) {
         number: phone,
       };
       // window.confirm(`Are you sure you want to update ${name}?`) 
+      console.log('updatedContact',updatedContact)
+
+const contactToUpdate  = contactsList.find(contact => contact.id === updatedContact.id)
+console.log('contactToUpdate',contactToUpdate)
+const allExeptUpdated = contactsList.filter(contact => contact.id !== contactToUpdate.id)
+console.log('allExeptUpdated',allExeptUpdated)
+
+if (allExeptUpdated.find((contact) => contact.name.toLowerCase() === updatedContact.name.toLowerCase())){
+  Notiflix.Notify.failure(`${updatedContact.name} is already in contacts.`);
+return ;
+}
+
+else if (allExeptUpdated.find((contact) => contact.number.toString() === updatedContact.number)) {
+  Notiflix.Notify.failure(`${updatedContact.number} is already in contacts.`);
+return ;
+}
+
 
 confirmUpdate(`Are you sure you want to update ${name}?`, name)
   .then(() => {

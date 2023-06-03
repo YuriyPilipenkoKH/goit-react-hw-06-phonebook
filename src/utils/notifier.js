@@ -10,7 +10,7 @@ export function confirmUpdate (question, name) {
               'Yes',
               'No',
               () => {
-                Notiflix.Notify.success(`Contact ${name} was updated.`);
+                // Notiflix.Notify.success(`Contact ${name} was updated.`);
                 resolve();
               },
               () => {

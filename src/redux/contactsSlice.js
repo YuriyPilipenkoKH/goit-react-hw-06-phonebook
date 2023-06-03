@@ -36,24 +36,13 @@ export const contactsSlice =  createSlice({
 
         reducer(state, action) {
   
-          const { id, name, number} = action.payload;  
-          const updatedContact = action.payload;
+          const { id} = action.payload;  
+   
+          const contactToUpdate  = state.contactsList.find(contact => contact.id === action.payload.id)
           const allExeptUpdated = state.contactsList.filter(contact => contact.id !== id);
-  
-          if (allExeptUpdated.find((contact) => contact.name.toLowerCase() === name.toLowerCase())){
-            Notiflix.Notify.failure(`${name} is already in contacts.`);
+          state.contactsList = [...allExeptUpdated, action.payload]
 
-          return ;
-          }
-
-          else if (allExeptUpdated.find((contact) => contact.number.toString() === number)) {
-            Notiflix.Notify.failure(`${number} is already in contacts.`);
-
-          return ;
-          }
-
-          state.contactsList = [...allExeptUpdated, updatedContact]
-          // Notiflix.Notify.success(`Contact ${name} updated.`);
+          Notiflix.Notify.success(`Contact ${contactToUpdate.name} was updated.`);
 
         }
         },
