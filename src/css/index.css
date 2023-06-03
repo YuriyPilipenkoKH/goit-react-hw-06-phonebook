@@ -306,6 +306,15 @@ img {
   transition: all 0.4s;
   /* fill:var(--react-color); */
 }
+.iconRedux {
+  transition: all 0.4s ;
+}
+.iconMphone {
+  fill: var(--teal)
+}
+.iconActor {
+  fill: var(--teal)
+}
 
 .to-top-button.visible {
   display: flex;

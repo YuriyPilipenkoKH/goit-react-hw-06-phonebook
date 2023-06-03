@@ -7,8 +7,6 @@ import { confirmDelete, confirmUpdate } from 'utils/notifier';
 
 
 
-
-
 export default function ContactListItem({ contact }) {
   const { id, name, number } = contact;
 

@@ -1,5 +1,5 @@
 import { Input, Form, Label, ContactFormBtn } from './ContactForm.styled';
-import { iconReactHook } from 'utils/svgIcons';
+import {iconRedux} from 'utils/svgIcons';
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
 import { nanoid } from 'nanoid';
@@ -76,7 +76,7 @@ const ContactForm = () => {
       type="submit"
     
      
-      >Add contact{ iconReactHook }</ContactFormBtn>
+      >Add contact{ iconRedux }</ContactFormBtn>
     </Form>
   );
 };

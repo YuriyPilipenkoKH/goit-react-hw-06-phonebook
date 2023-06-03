@@ -11,6 +11,10 @@ export const MainSection = styled.section`
 
 
 export const MainTitle = styled.h2`
+  display: flex;
+  gap: 20px;
+  justify-content: space-evenly;
+  align-items: center;
   width: 100%;
   font-size: 22px;
   text-align: center;
