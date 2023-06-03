@@ -20,7 +20,7 @@ export default function ContactListItem({ contact }) {
   const dispatch = useDispatch();
 
   const contactsList  = useSelector(state => state.contacts.contactsList )
-  console.log(contactsList)
+ 
 
   const handleEdit = () => {
     setIsEdit(prev => !prev )
@@ -31,13 +31,12 @@ export default function ContactListItem({ contact }) {
         name: nick,
         number: phone,
       };
-      // window.confirm(`Are you sure you want to update ${name}?`) 
-      console.log('updatedContact',updatedContact)
+
 
 const contactToUpdate  = contactsList.find(contact => contact.id === updatedContact.id)
-console.log('contactToUpdate',contactToUpdate)
+// console.log('contactToUpdate',contactToUpdate)
 const allExeptUpdated = contactsList.filter(contact => contact.id !== contactToUpdate.id)
-console.log('allExeptUpdated',allExeptUpdated)
+// console.log('allExeptUpdated',allExeptUpdated)
 
 if (allExeptUpdated.find((contact) => contact.name.toLowerCase() === updatedContact.name.toLowerCase())){
   Notiflix.Notify.failure(`${updatedContact.name} is already in contacts.`);
