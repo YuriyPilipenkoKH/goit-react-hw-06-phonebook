@@ -73,7 +73,6 @@ export const Input = styled.input`
     border: none;
     outline: none;
     cursor: none;
-    background-color: var(--lightgray);
 
     &:hover {
       box-shadow: var(--shadow-four);

@@ -11,7 +11,7 @@ export const FilterLabel = styled.label`
       outline: none;
       cursor: none;
  
-      background-color: var(--add-text-color);
+      background-color: var(--chamomile);
       &::placeholder {
         color: transparent;
       }

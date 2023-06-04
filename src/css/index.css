@@ -312,7 +312,7 @@ img {
 .iconMphone {
   fill: var(--teal)
 }
-.iconActor {
+.iconActor, .iconGypsy{
   fill: var(--teal)
 }
 
