@@ -4,7 +4,7 @@ import  ContactForm  from '../components/ContactForm/ContactForm';
 import { Filter } from '../components/Filter/Filter';
 import { ContactList } from '../components/ContactList/ContactList';
 import {  useSelector } from 'react-redux';
-import { iconMphone, iconActor, iconGypsy } from 'utils/svgIcons';
+import { iconMphone,  iconGypsy } from 'utils/svgIcons';
 
 
 
