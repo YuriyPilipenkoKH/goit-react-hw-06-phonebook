@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Notiflix from "notiflix";
-import { persistReducer } from 'redux-persist';
+// import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { fetchContacts } from "./operations";
 
 
 // const DEFAULT_CONTACTS = [
@@ -11,7 +12,11 @@ import storage from 'redux-persist/lib/storage';
 //   {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
 // ]
 
-const initialState = {contactsList: []};
+const initialState = { 
+  contactsList: [],
+  isLoading: false,
+  error: null,
+};
 
 export const contactsSlice =  createSlice({
     name: 'contacts',
@@ -37,7 +42,6 @@ export const contactsSlice =  createSlice({
         reducer(state, action) {
   
           const { id} = action.payload;  
-   
           const contactToUpdate  = state.contactsList.find(contact => contact.id === action.payload.id)
           const allExeptUpdated = state.contactsList.filter(contact => contact.id !== id);
           state.contactsList = [...allExeptUpdated, action.payload]
@@ -46,18 +50,35 @@ export const contactsSlice =  createSlice({
 
         }
         },
-    }
+      
+    },
+   
+    extraReducers: {
+      [fetchContacts.pending](state) {
+        state.isLoading = true;
+      },
+      [fetchContacts.fulfilled](state, action) {
+        state.isLoading = false;
+        state.error = null;
+        state.items = action.payload;
+      },
+      [fetchContacts.rejected](state, action) {
+        state.isLoading = false;
+        state.error = action.payload;
+      },
+    },
 })
 
-const persistConfig = {
-  key: 'contacts',
-  storage,
-};
+// const persistConfig = {
+//   key: 'contacts',
+//   storage,
+// };
 
 export const {addContact, deleteContact, editContact}  = contactsSlice.actions
+
 export const contactsReducer = contactsSlice.reducer
 
-export const persistedContactsReducer = persistReducer(
-  persistConfig,
-  contactsReducer
-);
+// export const persistedContactsReducer = persistReducer(
+//   persistConfig,
+//   contactsReducer
+// );
