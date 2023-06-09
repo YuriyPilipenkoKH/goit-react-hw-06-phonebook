@@ -21,5 +21,5 @@ export  const editSlice = createSlice({
 
 })
 
-export const {toggleEdit, updateValue}  = editSlice.actions
+export const { updateValue}  = editSlice.actions
 export const editReducer = editSlice.reducer

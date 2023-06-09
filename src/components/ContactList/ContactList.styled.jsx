@@ -168,3 +168,12 @@ export const BtnEdit = styled.button`
     ${myRippleStyles}
   }
 `
+export const EmptySpan = styled.span`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+`

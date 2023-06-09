@@ -1,37 +1,25 @@
-import { List,  ContactContainer } from './ContactList.styled';
+import { List,  ContactContainer, EmptySpan } from './ContactList.styled';
 import ContactListItem from 'components/ContactListItem/ContactListItem';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from 'redux/operations';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { getContactsList , getContactsFilter} from 'redux/selectors';
 
 
 export const ContactList = () => {
-  const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(fetchContacts())
- 
-  }, [dispatch])
-  
-  fetchContacts()
-
-  const contacts = useSelector(state => state.contacts.contactsList)
-  const filterValue = useSelector(state => state.filter)
+  const contacts = useSelector(getContactsList)
+  const filterValue = useSelector(getContactsFilter)
 
   const filteredContacts = [...contacts.filter((contact )=>
-     contact.name.toLowerCase().includes(filterValue.filter) ||
-     contact.number.toString().includes(filterValue.filter))]
-
-
+     contact.name.toLowerCase().includes(filterValue.filter) || contact.number.includes(filterValue.filter) )]
 
 
   return (
-    contacts.length !== 0 && (
+    filteredContacts.length !== 0 
+    ?(
       <ContactContainer>
         <List>
           {filteredContacts.map((contact) => {
-           
-
+          
             return (
             <ContactListItem 
             key={contact.id}
@@ -43,6 +31,10 @@ export const ContactList = () => {
         </List>
       </ContactContainer>
     )
+    :<ContactContainer>
+      <EmptySpan>No match to this query
+        </EmptySpan>
+    </ContactContainer>
   );
 };
 

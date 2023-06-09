@@ -3,15 +3,24 @@ import { Section } from "../components/section/Section";
 import  ContactForm  from '../components/ContactForm/ContactForm';
 import { Filter } from '../components/Filter/Filter';
 import { ContactList } from '../components/ContactList/ContactList';
-import {  useSelector } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import { iconMphone,  iconGypsy } from 'utils/svgIcons';
+import { useEffect } from 'react';
+import { getContactsList } from 'redux/selectors';
+import { fetchContacts } from 'redux/operations';
 
 
 
 const App = () => {
-  const contacts = useSelector(state => {
-    return state.contacts})
 
+  const dispatch = useDispatch()
+  const contacts = useSelector(getContactsList)
+  
+  useEffect(() => {
+    dispatch(fetchContacts())
+  
+  }, [dispatch] )
+  
   
   return (
   
@@ -22,7 +31,7 @@ const App = () => {
 
       <Section title="Contacts" icon = {iconGypsy}>
         <Filter />
-        {contacts.contactsList.length > 0 && (
+        {contacts.length > 0 && (
           <ContactList  />
         )}
       </Section>

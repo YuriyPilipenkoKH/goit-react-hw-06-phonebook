@@ -25,6 +25,7 @@
     "url": "git+https://github.com/YuriyPilipenkoKH/goit-react-hw-06-phonebook.git"
   },
   "scripts": {
+    "go": "set PORT=3030 && react-scripts start",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",

@@ -1,19 +1,17 @@
 import { Input, Form, Label, ContactFormBtn } from './ContactForm.styled';
 import {iconRedux} from 'utils/svgIcons';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
-import { nanoid } from 'nanoid';
+
 import { updateField, resetForm } from 'redux/formSlice';
 import Notiflix from 'notiflix';
+import { addContact } from 'redux/operations';
+import { getContactsList, getForm} from 'redux/selectors';
 
 
 const ContactForm = () => {
 
-  const contacts = useSelector(state =>  {
-   return state.contacts.contactsList
-  })
-
-  const { name, number } = useSelector((state) => state.form);
+  const contacts = useSelector(getContactsList)
+  const { name, number } = useSelector(getForm);
   const dispatch = useDispatch()
 
 
@@ -27,21 +25,21 @@ const ContactForm = () => {
     e.preventDefault();
 
     const newContact  = {
-      id: nanoid(),
-      name: name,
-      number: number,
+      name,
+      number,
     }
 
 
     if (contacts.find((contact) => contact.name.toLowerCase() === newContact.name.toLowerCase())) {
       Notiflix.Notify.failure(`${name} is already in contacts.`);
       return;
-    } else if (contacts.find((contact) => contact.number.toString() === number)) {
+    } else if (contacts.find((contact) => contact.number === number)) {
       Notiflix.Notify.failure(`${number} is already in contacts.`);
       return;
     }
 
     dispatch(addContact(newContact))
+
     dispatch(resetForm()); // Reset the form after submission
   };
 
