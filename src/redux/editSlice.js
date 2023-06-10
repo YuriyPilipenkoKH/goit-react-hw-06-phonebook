@@ -13,7 +13,7 @@ export  const editSlice = createSlice({
 
        updateValue:{
        reducer(state, action)  {
-        const { name } = action.payload;
+        // const { name } = action.payload;
         console.log(action.payload);
         state.nick = action.payload
         // const { field, value } = action.payload;

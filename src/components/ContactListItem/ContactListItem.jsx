@@ -6,23 +6,18 @@ import { confirmDelete, confirmUpdate } from 'utils/notifier';
 import { useSelector } from 'react-redux';
 import Notiflix from 'notiflix';
 import { deleteContact } from 'redux/operations';
-import { getContactsList , getEditedName, getEditedPhone} from 'redux/selectors';
+import { getContactsList } from 'redux/selectors';
 import { editContact } from 'redux/operations';
-import { updateValue } from 'redux/editSlice';
-
 
 
 export default function ContactListItem({ contact }) {
   const dispatch = useDispatch();
   const contactsList  = useSelector(getContactsList )
-  const editedName = useSelector(getEditedName)
-  const editedPhone = useSelector(getEditedPhone)
-
   const { id, name, number} = contact;
 
   const [isEdit, setIsEdit] = useState(false)
-  const [nick, setNick] = useState(editedName)
-  const [phone, setPhone] = useState(editedPhone)
+  const [nick, setNick] = useState(name)
+  const [phone, setPhone] = useState(number)
 
 
   const handleEdit = () => {
@@ -35,28 +30,36 @@ export default function ContactListItem({ contact }) {
         number: phone,
       };
 
+    
+
 console.log('updatedContact' , updatedContact );
 const contactToUpdate  = contactsList.find(contact => contact.id === updatedContact.id)
-// console.log('contactToUpdate',contactToUpdate)
+console.log('contactToUpdate',contactToUpdate)
 
 const allExeptUpdated = contactsList.filter(contact => contact.id !== contactToUpdate.id)
 // console.log('allExeptUpdated',allExeptUpdated)
 
+const returnDefault =() =>{
+  setNick(contactToUpdate.name)
+  setPhone(contactToUpdate.number)
+}  
+
 if(updatedContact.name === '' || updatedContact.number === ''){
   Notiflix.Notify.failure('No Empty Strings, dude!');
-
+  returnDefault()
   return;
 }
 
 if (allExeptUpdated.find((contact) => contact.name.toLowerCase() === updatedContact.name.toLowerCase())){
   Notiflix.Notify.failure(`${updatedContact.name} is already in contacts.`);
-  dispatch(updateValue({ nick: name, phone: number }))
-return ;
+  returnDefault()
+  return ;
 }
 
 else if (allExeptUpdated.find((contact) => contact.number === updatedContact.number)) {
   Notiflix.Notify.failure(`${updatedContact.number} is already in contacts.`);
-return ;
+  returnDefault() 
+  return ;
 }
 
 

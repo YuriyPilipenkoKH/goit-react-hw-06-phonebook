@@ -11,7 +11,7 @@ export  const SortBtns = styled.button`
 padding: 8px;
 border-radius: 6px;
 border: transparent;
-background-color: #777;
+background-color: #888;
 color: #eee;
 font-weight: 600;
 letter-spacing: 2px;
