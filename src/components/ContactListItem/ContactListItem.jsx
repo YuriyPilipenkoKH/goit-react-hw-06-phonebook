@@ -8,6 +8,7 @@ import Notiflix from 'notiflix';
 import { deleteContact } from 'redux/operations';
 import { getContactsList } from 'redux/selectors';
 import { editContact } from 'redux/operations';
+import { IDspan } from './ContactListItem.styled';
 
 
 export default function ContactListItem({ contact }) {
@@ -110,12 +111,14 @@ confirmUpdate(`Are you sure you want to update ${name}?`, name)
 
   return (
     <ListItem totalItems={4}>
+      <IDspan>{id}</IDspan>
       {isEdit ? (
         <EditWrapper className="edit-wrapper">
           <input type="text" name="nick" value={nick} onChange={handleChange} />
           <input type="text" name="phone" value={phone} onChange={handleChange} />
         </EditWrapper>
       ) : (
+        
         <ItemCard className="cardSpan">
           {contact.name}: {contact.number}
         </ItemCard>
