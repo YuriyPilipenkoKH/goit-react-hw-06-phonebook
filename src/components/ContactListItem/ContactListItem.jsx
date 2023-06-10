@@ -1,27 +1,28 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-
 import { BtnDelete, BtnEdit, BtnWrapper, EditWrapper, ItemCard, ListItem } from 'components/ContactList/ContactList.styled';
 import { useState } from 'react';
 import { confirmDelete, confirmUpdate } from 'utils/notifier';
 import { useSelector } from 'react-redux';
 import Notiflix from 'notiflix';
 import { deleteContact } from 'redux/operations';
-import { getContactsList } from 'redux/selectors';
+import { getContactsList , getEditedName, getEditedPhone} from 'redux/selectors';
 import { editContact } from 'redux/operations';
+import { updateValue } from 'redux/editSlice';
 
 
 
 export default function ContactListItem({ contact }) {
- 
-  const { id, name, number } = contact;
-
-  const [isEdit, setIsEdit] = useState(false)
-  const [nick, setNick] = useState(name)
-  const [phone, setPhone] = useState(number)
-
   const dispatch = useDispatch();
   const contactsList  = useSelector(getContactsList )
+  const editedName = useSelector(getEditedName)
+  const editedPhone = useSelector(getEditedPhone)
+
+  const { id, name, number} = contact;
+
+  const [isEdit, setIsEdit] = useState(false)
+  const [nick, setNick] = useState(editedName)
+  const [phone, setPhone] = useState(editedPhone)
 
 
   const handleEdit = () => {
@@ -43,11 +44,13 @@ const allExeptUpdated = contactsList.filter(contact => contact.id !== contactToU
 
 if(updatedContact.name === '' || updatedContact.number === ''){
   Notiflix.Notify.failure('No Empty Strings, dude!');
+
   return;
 }
 
 if (allExeptUpdated.find((contact) => contact.name.toLowerCase() === updatedContact.name.toLowerCase())){
   Notiflix.Notify.failure(`${updatedContact.name} is already in contacts.`);
+  dispatch(updateValue({ nick: name, phone: number }))
 return ;
 }
 

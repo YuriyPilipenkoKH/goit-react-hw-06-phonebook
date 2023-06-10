@@ -6,19 +6,21 @@ export  const editSlice = createSlice({
     name: 'edit',
     initialState: {
      
-        nick : '',
-        phone: '',
+        nick : 'Bob',
+        phone: '888-22-00',
     },
     reducers: {
 
        updateValue:{
        reducer(state, action)  {
-        const { field, value } = action.payload;
-        state[field] = value;
+        const { name } = action.payload;
+        console.log(action.payload);
+        state.nick = action.payload
+        // const { field, value } = action.payload;
+        // state[field] = value;
        
         }},
 }
-
 })
 
 export const { updateValue}  = editSlice.actions
