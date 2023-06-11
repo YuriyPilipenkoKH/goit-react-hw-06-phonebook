@@ -15,11 +15,12 @@ export const ContactList = () => {
 
   console.log(sorted )
   // console.log(arrayOfMethods[sorted.activeIndex]);
-  console.log(arrayOfBools[sorted.activeIndex])
+  // console.log(arrayOfBools[sorted.activeIndex])
  
+  const sortedContacts = arrayOfMethods[sorted.activeIndex]
 
 
-  const filteredContacts = [...arrayOfMethods[sorted.activeIndex](contacts, arrayOfBools[sorted.activeIndex]).filter((contact )=>
+  const filteredContacts = [...sortedContacts(contacts, arrayOfBools[sorted.activeIndex]).filter((contact )=>
      contact.name.toLowerCase().includes(filterValue.filter) || contact.number.includes(filterValue.filter) )]
 
 
