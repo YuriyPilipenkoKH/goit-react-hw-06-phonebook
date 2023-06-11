@@ -15,4 +15,11 @@ background-color: #888;
 color: #eee;
 font-weight: 600;
 letter-spacing: 2px;
+transition: 0.2s ease;
+
+&:active,
+&:focus {
+    background-color: var(--blue);
+    box-shadow: var(--shadow-four);
+}
 `

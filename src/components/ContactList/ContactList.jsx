@@ -2,21 +2,24 @@ import { List,  ContactContainer, EmptySpan } from './ContactList.styled';
 import ContactListItem from 'components/ContactListItem/ContactListItem';
 import { useSelector } from 'react-redux';
 import { getContactsList , getContactsFilter, getSorted} from 'redux/selectors';
+import { arrayOfMethods} from 'redux/selectors';
 
 
 export const ContactList = () => {
 
   const contacts = useSelector(getContactsList)
   const filterValue = useSelector(getContactsFilter)
-  const sorted  =useSelector(getSorted)
-  console.log(sorted);
+  const sorted  = useSelector(getSorted)
+  const {id, date,  name, number}  = useSelector(getSorted)
+  const arrayOfBools = [id, date, name, number]
 
-  const sortedByIda = [...contacts].sort((a, b) => parseInt(a.id) - parseInt(b.id));
-  // console.log("Sorted acs:", sortedByIda);
-  const sortedByIdd = [...contacts].sort((a, b) => parseInt(b.id) - parseInt(a.id));
-  // console.log("Sorted dcs:", sortedByIdd);
+  console.log(sorted )
+  // console.log(arrayOfMethods[sorted.activeIndex]);
+  console.log(arrayOfBools[sorted.activeIndex])
+ 
 
-  const filteredContacts = [...contacts.filter((contact )=>
+
+  const filteredContacts = [...arrayOfMethods[sorted.activeIndex](contacts, arrayOfBools[sorted.activeIndex]).filter((contact )=>
      contact.name.toLowerCase().includes(filterValue.filter) || contact.number.includes(filterValue.filter) )]
 
 
