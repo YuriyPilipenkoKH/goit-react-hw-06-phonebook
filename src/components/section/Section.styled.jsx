@@ -18,10 +18,16 @@ export const MainTitle = styled.h2`
   width: 100%;
   font-size: 22px;
   text-align: center;
-  color: var(--teal);
+  color: #eee;
   margin: 0;
   padding: 8px 30px;
   border-radius: 10px;
-  border: 4px solid var(--teal);
+  background-color: #777;
+  border: 4px solid #777;
   box-shadow: var(--shadow-four);
+
+
+  &>svg {
+    fill: #eee;
+  }
 `

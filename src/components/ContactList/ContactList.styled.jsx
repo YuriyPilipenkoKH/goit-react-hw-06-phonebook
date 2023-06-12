@@ -19,7 +19,7 @@ const ulAnimation = keyframes`
 export const List = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   list-style-type: disc;
 
 
@@ -102,6 +102,7 @@ export const ContactContainer = styled.div`
   max-height: 480px;
   padding: 4px 2px;
   border: 3px solid var(--teal);
+  background-color: #eee5;
   border-radius: 16px;
   box-shadow: var(--shadow-four);
   overflow: auto;
@@ -193,4 +194,32 @@ export const EmptySpan = styled.span`
   font-size: 24px;
   font-weight: 600;
   color: #333;
+
+
+`
+
+
+export const Count  = styled.span`
+position: absolute;
+top: 540px;
+right: 50%;
+transform: translateX(130px);
+width: 46px;
+display: flex;
+align-items: center;
+justify-content: center;
+
+background-color: var(--orange);
+padding: 12px;
+border-radius: 50%;
+color: #555;
+font-weight: 800;
+letter-spacing: 1px;
+z-index: 10;
+
+@media screen and (min-width: 768px) {
+  top: 473px;
+  right: 50%; 
+  transform: translateX(200px);
+    }
 `

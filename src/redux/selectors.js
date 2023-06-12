@@ -32,8 +32,3 @@ export const getSortedByName = (contactsList, bool)  => {
 } 
 
 export const arrayOfMethods = [getSortedById, getSortedByDate, getSortedByName, getSortedByNumber]
-// const fn = (type) => {
-// // return arrayOfMethods.map(el => el[type])
-// return arrayOfMethods.find((el,i) => el(i === type))
-// }
-// console.log(fn(0));
