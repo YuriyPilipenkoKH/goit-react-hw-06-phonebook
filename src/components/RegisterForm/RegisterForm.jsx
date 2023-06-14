@@ -19,6 +19,9 @@ export const RegisterForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [show, setShow] = useState(false);
+
+
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -64,11 +67,16 @@ export const RegisterForm = () => {
         <label style={styles.label}>
           Пароль
           <input
-            type="password"
+            type={show ? 'text' : 'password'}
             name="password"
             value={password}
             onChange={handleChange}
           />
+            <button 
+            type='button' 
+            onClick={() => setShow(!show)}>
+              {show ? 'Hide' : 'Show'}
+              </button>
         </label>
 
         <button type="submit">Зарегистрироваться</button>

@@ -12,9 +12,6 @@ import { getContactsList } from 'redux/selectors';
 export const Phonebook = () => {
     const contacts = useSelector(getContactsList)
   
-
-
-
   return (
     <Container>
     <Section title="Phonebook" icon ={iconMphone}>

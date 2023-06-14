@@ -4,16 +4,21 @@ import { logOut } from 'redux/auth/operations';
 
 
 
-export const UserMenu = () => {
+export function UserMenu() {
   const dispatch = useDispatch();
-  const { user } = useAuth();
+  const { isFetching } = useAuth();
+  const { user, isLoggedIn } = useAuth();
+
 
   return (
-    <div >
-      <p >Welcome, {user.name}</p>
-      <button type="button" onClick={() => dispatch(logOut())}>
-        Logout
-      </button>
-    </div>
+    <>
+      {isFetching && <p> Loading</p >}
+      {isLoggedIn && (
+        <div>
+          <p>Hello, {user.name}</p>
+          <button onClick={() => dispatch(logOut())}>Logout</button>
+        </div>
+      )}
+    </>
   );
-};
+}

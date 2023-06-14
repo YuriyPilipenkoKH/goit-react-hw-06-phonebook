@@ -5,6 +5,8 @@ export const getEditedName =  state => state.edit.nick
 export const getEditedPhone =  state => state.edit.phone
 export const getSorted =  state => state.sort
 
+export const selectIsLoading = state => state.contacts.isLoading;
+
 
 
 export const getSortedById = (contactsList, bool)  => { 

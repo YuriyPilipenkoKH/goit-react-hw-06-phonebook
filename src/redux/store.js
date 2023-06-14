@@ -12,7 +12,6 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { contactsReducer } from "./contactsSlice";
 import { filterReducer } from "./filterSlice";
-import { editReducer } from "./editSlice";
 import { formReducer } from "./formSlice";
 import { sortReducer } from "./sortSlice";
 import { authReducer } from "./auth/authSlice";
@@ -32,7 +31,7 @@ export const store = configureStore({
         contacts: contactsReducer,
         form: formReducer,    
         filter: filterReducer,
-        edit: editReducer ,
+   
         sort:sortReducer,
         auth: persistReducer(authPersistConfig, authReducer),
 
