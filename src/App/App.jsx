@@ -1,45 +1,75 @@
-import { Container } from '../components/container/Container';
-import { Section } from "../components/section/Section";
-import  ContactForm  from '../components/ContactForm/ContactForm';
-import { Filter } from '../components/Filter/Filter';
-import { ContactList } from '../components/ContactList/ContactList';
-import ListBar from 'components/ListBar/ListBar';
-import {  useDispatch, useSelector } from 'react-redux';
-import { iconMphone,  iconGypsy } from 'utils/svgIcons';
-import { useEffect } from 'react';
-import { getContactsList } from 'redux/selectors';
-import { fetchContacts } from 'redux/operations';
+
+import { lazy} from 'react';
+
+import { Route, Routes } from 'react-router-dom';
+
+// import { PrivateRoute } from '../components/PrivateRoute';
+// import { RestrictedRoute } from '../components/RestrictedRoute';
+
+// import { refreshUser } from 'redux/auth/operations';
+
+import { Layout } from 'components/Layout/Layout';
+import { Container } from 'components/container/Container';
+import Home from 'pages/Home';
+import Register from 'pages/Register';
+import Login from 'pages/Login';
+import { Phonebook } from 'pages/Phonebook';
+
+// import { RestrictedRoute } from 'components/RestrictedRoute/RestrictedRoute';
+// import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
+
+// const HomePage = lazy(() => import('../pages/Home'));
+// const RegisterPage = lazy(() => import('../pages/Register'));
+// const LoginPage = lazy(() => import('../pages/Login'));
+// const PhonebookPage = lazy(() => import('../pages/Phonebook'));
 
 
 
 const App = () => {
 
-  const dispatch = useDispatch()
-  const contacts = useSelector(getContactsList)
-  
-  useEffect(() => {
-    dispatch(fetchContacts())
-  
-  }, [dispatch] )
-  
-  
   return (
-  
+   
     <Container>
-      <Section title="Phonebook" icon ={iconMphone}>
-        <ContactForm  />
-      </Section>
-
-      <Section title="Contacts" icon = {iconGypsy}>
-        <Filter />
-        <ListBar></ListBar>
-        {contacts.length > 0 && (
-          <ContactList  />
-        )}
-      </Section>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={< Home />} />
+        <Route path="register" element={<Register/>} />
+        <Route path="login" element={<Login/>} />
+        <Route path="phonebook" element={<Phonebook/>} />
+     
+       
+      </Route>
+      {/* <Route path="*" element={<NotFound />} /> */}
+    </Routes>
+   {/* <ToTopButton/> */}
     </Container>
+
 
   );
 };
 
 export default App;
+
+  //   <Routes>
+  //   <Route path="/" element={<Layout />}>
+  //     <Route index element={<HomePage />} />
+  //     <Route
+  //       path="/register"
+  //       element={
+  //         <RestrictedRoute redirectTo="/contacts" component={<RegisterPage />} />
+  //       }
+  //     />
+  //     <Route
+  //       path="/login"
+  //       element={
+  //         <RestrictedRoute redirectTo="/tasks" component={<LoginPage />} />
+  //       }
+  //     />
+  //     <Route
+  //       path="/tasks"
+  //       element={
+  //         <PrivateRoute redirectTo="/login" component={<PhonebookPage />} />
+  //       }
+  //     />
+  //   </Route>
+  // </Routes>

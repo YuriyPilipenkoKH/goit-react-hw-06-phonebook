@@ -1,41 +1,78 @@
-import { useDispatch } from "react-redux";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { register } from 'redux/auth/operations';
 
 
+const styles = {
+  form: {
+    width: 320,
+  },
+  label: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: 15,
+  },
+};
 
+export const RegisterForm = () => {
+  const dispatch = useDispatch();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-export  const RegisterForm = () => {
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case 'name':
+        return setName(value);
+      case 'email':
+        return setEmail(value);
+      case 'password':
+        return setPassword(value);
+      default:
+        return;
+    }
+  };
 
-    const dispatch = useDispatch();
-
-    const handleSubmit = e => {
-        e.preventDefault();
-        const form = e.currentTarget;
-        dispatch(
-        //   register({
-        //     name: form.elements.name.value,
-        //     email: form.elements.email.value,
-        //     password: form.elements.password.value,
-        //   })
-        );
-        form.reset();
-      };
+  const handleSubmit = e => {
+    e.preventDefault();
+    dispatch(register({ name, email, password }));
+    setName('');
+    setEmail('');
+    setPassword('');
+  };
 
   return (
-    <form c onSubmit={handleSubmit} autoComplete="off">
-    <label >
-      Username
-      <input type="text" name="name" />
-    </label>
-    <label >
-      Email
-      <input type="email" name="email" />
-    </label>
-    <label >
-      Password
-      <input type="password" name="password" />
-    </label>
-    <button type="submit">Register</button>
-  </form>
-  )
-}
+    <div>
+      <h1>Страница регистрации</h1>
 
+      <form onSubmit={handleSubmit} style={styles.form} autoComplete="on">
+        <label style={styles.label}>
+          Имя
+          <input type="text" name="name" value={name} onChange={handleChange} />
+        </label>
+
+        <label style={styles.label}>
+          Почта
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label style={styles.label}>
+          Пароль
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
+        </label>
+
+        <button type="submit">Зарегистрироваться</button>
+      </form>
+    </div>
+  );
+}
