@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 // import { refreshUser } from 'redux/auth/operations';
 import { Layout } from 'components/Layout/Layout';
 import { Container } from 'components/container/Container';
+
 // import { useDispatch } from 'react-redux';
 
 
@@ -26,6 +27,7 @@ const App = () => {
   return (
    
     <Container>
+   
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={< Home />} />
@@ -37,7 +39,6 @@ const App = () => {
       </Route>
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
-   {/* <ToTopButton/> */}
     </Container>
 
 

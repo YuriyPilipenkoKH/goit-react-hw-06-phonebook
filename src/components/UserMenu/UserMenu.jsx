@@ -1,3 +1,5 @@
+import Button from 'components/Button/Button';
+import { StyledWrap } from 'components/Navigation/Navigation.styled';
 import { useAuth } from 'hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
@@ -14,10 +16,10 @@ export function UserMenu() {
     <>
       {isFetching && <p> Loading</p >}
       {isLoggedIn && (
-        <div>
+        <StyledWrap>
           <p>Hello, {user.name}</p>
-          <button onClick={() => dispatch(logOut())}>Logout</button>
-        </div>
+          <Button onClick={() => dispatch(logOut())}>Logout</Button>
+        </StyledWrap>
       )}
     </>
   );

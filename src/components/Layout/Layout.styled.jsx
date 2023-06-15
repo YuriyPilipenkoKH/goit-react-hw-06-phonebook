@@ -10,17 +10,13 @@ export const MainHeader= styled.header`
   display: flex;
   gap: 25px;
   align-items: center;
-  justify-content: space-between;
+ 
   padding: 32px 16px 16px;
   background-color: var(--body-color);
  
   border-bottom: 1px solid #222;
 
-  > nav {
-    display: flex;
-    gap: 18px;
- 
-  }
+
 
   >.logo{
     width: 100px;
@@ -57,6 +53,7 @@ export const StyledLink = styled(NavLink)`
   border-radius: 4px;
   text-decoration: none;
   color: #222;
+
   font-weight: 500;
   transition: 0.3s ease;
 
