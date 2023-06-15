@@ -1,31 +1,41 @@
-import { Container } from '../components/container/Container';
+// import { Container } from '../components/container/Container';
 import { Section } from "../components/section/Section";
-import  ContactForm  from '../components/ContactForm/ContactForm';
+import ContactForm from "components/ContactForm/ContactForm";
 import { Filter } from '../components/Filter/Filter';
 import { ContactList } from '../components/ContactList/ContactList';
 import ListBar from 'components/ListBar/ListBar';
-import {  useSelector } from 'react-redux';
-import { iconMphone,  iconGypsy } from 'utils/svgIcons';
+import {  useDispatch, useSelector } from 'react-redux';
+import { iconMphone } from 'utils/svgIcons';
 import { getContactsList } from 'redux/selectors';
+import { fetchContacts } from "redux/operations";
+import { useEffect } from "react";
 
 
 export const Phonebook = () => {
-    const contacts = useSelector(getContactsList)
+  const dispatch = useDispatch()
+  const contacts = useSelector(getContactsList)
+  
+  useEffect(() => {
+    dispatch(fetchContacts())
+  
+  }, [dispatch] )
   
   return (
-    <Container>
+    <>
     <Section title="Phonebook" icon ={iconMphone}>
       <ContactForm  />
-    </Section>
 
-    <Section title="Contacts" icon = {iconGypsy}>
       <Filter />
-      <ListBar></ListBar>
+      
       {contacts.length > 0 && (
+        <>
+       <ListBar></ListBar>
         <ContactList  />
+        </>
       )}
     </Section>
-  </Container>
+
+  </>
   )
 }
 

@@ -53,7 +53,7 @@ export const ListItem = styled.li`
    padding: 8px 10px;  
 
   @media screen and (min-width: 768px) {
-    grid-template-columns: 50px auto 200px;
+    grid-template-columns:  auto 200px;
     }
 `;
 
@@ -201,7 +201,7 @@ export const EmptySpan = styled.span`
 
 export const Count  = styled.span`
 position: absolute;
-top: 540px;
+top: 500px;
 right: 50%;
 transform: translateX(130px);
 width: 46px;
@@ -218,8 +218,8 @@ letter-spacing: 1px;
 z-index: 10;
 
 @media screen and (min-width: 768px) {
-  top: 473px;
+  top: 500px;
   right: 50%; 
-  transform: translateX(200px);
+  transform: translateX(140px);
     }
 `

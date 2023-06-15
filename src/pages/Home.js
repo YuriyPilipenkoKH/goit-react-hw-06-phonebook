@@ -14,9 +14,7 @@ export default function Home() {
           </span>
         </h1>
         <Link to={isLoggenIn ? '/contacts' : '/register'}>
-                        <button colorScheme="teal" type="button">
-                            Get started
-                        </button>
+
                     </Link>
       </div>
     );
