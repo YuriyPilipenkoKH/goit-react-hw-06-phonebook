@@ -326,3 +326,7 @@ img {
   display: flex;
 }
 
+.home_wrapper {
+  display: grid;
+  place-items: center;
+}

@@ -9,30 +9,39 @@ import Login from 'pages/Login';
 import { Phonebook } from 'pages/Phonebook';
 
 import { useDispatch } from 'react-redux';
+import { PrivateRoute, RestrictedRoute } from 'components/Routes';
+import { NotFound } from 'pages/NotFound';
+import { useAuth } from 'hooks/useAuth';
 
 
 
 
 const App = () => {
+  const { isRefreshing } = useAuth();
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? (
+   <div>Loader</div>
+  ) : (
    
     <Container>
-   
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={< Home />} />
         <Route path="/register" element={<Register/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/phonebook" element={<Phonebook/>} />
-
+        <Route path="/login" element={
+             <RestrictedRoute redirectTo="/phonebook" component={<Login />} />
+        } />
+        <Route path="/phonebook" element={
+        <PrivateRoute redirectTo="/login" component={<Phonebook />} />
+        } />
+        <Route path="*" element={<NotFound/>} />
      </Route>
-      {/* <Route path="*" element={<NotFound />} /> */}
+      
     </Routes>
     </Container>
 

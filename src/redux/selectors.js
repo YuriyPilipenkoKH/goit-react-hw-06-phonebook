@@ -10,16 +10,24 @@ export const selectIsLoading = state => state.contacts.isLoading;
 
 
 export const getSortedById = (contactsList, bool)  => { 
+    const arrayOfIds = [] 
+    contactsList.map(contact => {
+    return  arrayOfIds.push(contact.id)
+    } )
+    console.log(arrayOfIds)
+    const short = arrayOfIds.map(id => id.split('') )
+    console.log(short);
+
     return bool 
     ? [...contactsList].sort((a, b) => parseInt(a.id) - parseInt(b.id))
     : [...contactsList].sort((b, a) => parseInt(a.id) - parseInt(b.id)) 
   } 
 
-export const getSortedByDate = (contactsList, bool)  => {
-    return bool 
-    ? [...contactsList].sort((a, b) => a.createdAt.localeCompare(b.createdAt))
-    : [...contactsList].sort((b, a) => a.createdAt.localeCompare(b.createdAt))
-  } 
+// export const getSortedByDate = (contactsList, bool)  => {
+//     return bool 
+//     ? [...contactsList].sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+//     : [...contactsList].sort((b, a) => a.createdAt.localeCompare(b.createdAt))
+//   } 
 
 export const getSortedByName = (contactsList, bool)  => {
     return bool 
@@ -33,4 +41,4 @@ export const getSortedByName = (contactsList, bool)  => {
     : [...contactsList].sort((b, a) => a.number.localeCompare(b.number))
 } 
 
-export const arrayOfMethods = [getSortedById, getSortedByDate, getSortedByName, getSortedByNumber]
+export const arrayOfMethods = [getSortedById,  getSortedByName, getSortedByNumber]

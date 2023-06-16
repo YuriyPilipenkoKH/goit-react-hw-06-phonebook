@@ -1,21 +1,20 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { selectIsLoggedIn } from "redux/auth/selectors";
+// import { useSelector } from "react-redux";
+// import { selectIsLoggedIn } from "redux/auth/selectors";
+import { happyCoyote } from "utils/svgIcons";
 
 export default function Home() {
 
-  const isLoggenIn = useSelector(selectIsLoggedIn);
+  // const isLoggenIn = useSelector(selectIsLoggedIn);
     return (
-      <div >
+      <div  className="home_wrapper">
         <h1 >
-          Task manager welcome page{' '}
-          <span role="img" aria-label="Greeting icon">
-            💁‍♀️
-          </span>
+        React-Phonebook welcome page
+          
         </h1>
-        <Link to={isLoggenIn ? '/contacts' : '/register'}>
+        { happyCoyote }
+        {/* <Link to={isLoggenIn ? '/contacts' : '/register'}>
 
-                    </Link>
+                    </Link> */}
       </div>
     );
   }

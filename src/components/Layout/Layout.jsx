@@ -6,13 +6,13 @@ import { MainFooter, MainHeader} from "./Layout.styled";
 export const Layout = () => {
     return (
         <>
-        <MainHeader>
+        <MainHeader className="main-header">
         <AppBar/>
         </MainHeader>
         <Suspense >
                   <Outlet />
         </Suspense>
         
-        <MainFooter>React-Phonebook-2023</MainFooter>
+        <MainFooter>React-Phonebook-2023 ©</MainFooter>
           </>
     )}

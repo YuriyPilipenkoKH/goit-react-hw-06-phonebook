@@ -11,10 +11,6 @@ const ListBar = () => {
         dispatch(toggleSortId()) 
     }
 
-    // const sortByDate = () =>{ 
-    //     dispatch(toggleSortDate()) 
-    // }
-
     const sortByName = () =>{
         dispatch(toggleSortName()) 
     }
@@ -27,7 +23,6 @@ const ListBar = () => {
   return (
     <StyledListBar>
         <SortBtns onClick={sortById}>id</SortBtns>
-        {/* <SortBtns onClick={sortByDate}>date</SortBtns> */}
         <SortBtns onClick={sortByName}> name</SortBtns>
         <SortBtns onClick={sortByNumber}>phone</SortBtns>
     </StyledListBar>

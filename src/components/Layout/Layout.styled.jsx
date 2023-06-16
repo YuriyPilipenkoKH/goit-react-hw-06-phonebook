@@ -5,12 +5,12 @@ export const MainHeader= styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  position: sticky;
+ 
   z-index: 100;
   display: flex;
   gap: 25px;
   align-items: center;
- 
+
   padding: 32px 16px 16px;
   background-color: var(--body-color);
  

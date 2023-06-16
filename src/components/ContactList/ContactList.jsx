@@ -9,16 +9,18 @@ export const ContactList = () => {
 
   const contacts = useSelector(getContactsList)
   const filterValue = useSelector(getContactsFilter)
-  const {activeIndex, id, date,  name, number}  = useSelector(getSorted)
-  const arrayOfBools = [id, date, name, number]
+  const {activeIndex, id,  name, number}  = useSelector(getSorted)
+  const arrayOfBools = [id,  name, number]
 
   // console.log(arrayOfMethods[sorted.activeIndex]);
   // console.log(arrayOfBools[sorted.activeIndex])
  
   const sortedContacts = arrayOfMethods[activeIndex]
 
-  const filteredContacts = [...sortedContacts(contacts, arrayOfBools[activeIndex]).filter((contact )=>
-     contact.name.toLowerCase().includes(filterValue.filter) || contact.number.includes(filterValue.filter) )]
+  const filteredContacts = [...sortedContacts(contacts, arrayOfBools[activeIndex])
+    .filter((contact )=>
+     contact.name.toLowerCase().includes(filterValue.filter) 
+     || contact.number.includes(filterValue.filter) )]
 
 
   return (
