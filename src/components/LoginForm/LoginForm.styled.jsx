@@ -4,10 +4,11 @@ export const FormWrapper = styled.div`
     
 display: flex;
 flex-direction: column;
-gap: 8px;
+gap: 18px;
 padding:  32px 16px;
 border: 4px solid #777;
 border-radius: 12px;
+box-shadow: var(--shadow-four);
 `
 
 export const StyledForm = styled.form`

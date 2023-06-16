@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
 import { FormWrapper, ShowBtn, StyledForm } from './LoginForm.styled';
+import { MainTitle } from 'components/section/Section.styled';
 // import { authOperations } from '../redux/auth';
 
 
@@ -36,7 +37,7 @@ export const LoginForm = () => {
 
   return (
     <FormWrapper>
-      <h1>LogIn</h1>
+      <MainTitle>LogIn</MainTitle>
 
       <StyledForm  onSubmit={handleSubmit}  autoComplete="on">
         <Label >

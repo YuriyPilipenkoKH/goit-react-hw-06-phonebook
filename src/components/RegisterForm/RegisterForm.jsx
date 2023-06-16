@@ -1,6 +1,7 @@
 import Button from 'components/Button/Button';
 import { Input, Label } from 'components/ContactForm/ContactForm.styled';
 import { FormWrapper, ShowBtn, StyledForm } from 'components/LoginForm/LoginForm.styled';
+import { MainTitle } from 'components/section/Section.styled';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
@@ -40,7 +41,7 @@ export const RegisterForm = () => {
 
   return (
     <FormWrapper>
-      <h1>Register</h1>
+      <MainTitle>Register</MainTitle>
 
       <StyledForm onSubmit={handleSubmit}  autoComplete="on">
         <Label >
