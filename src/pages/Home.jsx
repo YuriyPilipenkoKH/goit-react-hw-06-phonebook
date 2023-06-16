@@ -1,13 +1,15 @@
+import { HomeTitle, HomeWrapper } from "./Pages.styled";
 
 export default function Home() {
 
 
     return (
-      <div  className="home__wrapper">
-        <h1 className="home__title">
-        React-Phonebook welcome page   
-        </h1>
+      <HomeWrapper className="home__wrapper" >
+        <HomeTitle >
+         React-phonebook  
+        </HomeTitle>
+        <span>web application that allows users to store and manage their contacts, <br /> providing features for adding, editing, and deleting contact information</span>
 
-      </div>
+      </HomeWrapper>
     );
   }

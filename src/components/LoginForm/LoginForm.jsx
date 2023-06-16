@@ -66,7 +66,7 @@ export const LoginForm = () => {
               </ShowBtn>
         </Label>
 
-        <Button type="submit">LogIn</Button>
+        <Button type="submit">Log In</Button>
       </StyledForm>
     </FormWrapper>
   );

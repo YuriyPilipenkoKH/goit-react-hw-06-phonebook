@@ -20,7 +20,7 @@ export function UserMenu() {
         <StyledWrap>
           { iconActor }
           <p>{user.name}</p>
-          <Button onClick={() => dispatch(logOut())}>Logout</Button>
+          <Button onClick={() => dispatch(logOut())}>LogOut</Button>
         </StyledWrap>
       )}
     </>
