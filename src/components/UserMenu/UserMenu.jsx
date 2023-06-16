@@ -3,7 +3,7 @@ import { StyledWrap } from 'components/Navigation/Navigation.styled';
 import { useAuth } from 'hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
-
+import { iconActor } from 'utils/svgIcons';
 
 
 export function UserMenu() {
@@ -17,7 +17,8 @@ export function UserMenu() {
       {isFetching && <p> Loading</p >}
       {isLoggedIn && (
         <StyledWrap>
-          <p>Hello, {user.name}</p>
+          { iconActor }
+          <p>{user.name}</p>
           <Button onClick={() => dispatch(logOut())}>Logout</Button>
         </StyledWrap>
       )}

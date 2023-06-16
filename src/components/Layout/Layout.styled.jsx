@@ -44,6 +44,7 @@ export const MainHeader= styled.header`
 `
 
 export const StyledLink = styled(NavLink)`
+  height: 34px;
   width: 95px;  
   display: flex;
   align-items: center;

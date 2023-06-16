@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { PrivateRoute, RestrictedRoute } from 'components/Routes';
 import { NotFound } from 'pages/NotFound';
 import { useAuth } from 'hooks/useAuth';
+import Loader from 'components/Loader/Loader';
 
 
 
@@ -25,7 +26,7 @@ const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-   <div>Loader</div>
+   <Loader/>
   ) : (
    
     <Container>

@@ -316,10 +316,10 @@ img {
   transition: all 0.4s ;
 }
 .iconMphone {
-  fill: var(--teal)
+  fill: var(--teal);
 }
 .iconActor, .iconGypsy{
-  fill: var(--teal)
+  fill: #555;
 }
 
 .to-top-button.visible {
