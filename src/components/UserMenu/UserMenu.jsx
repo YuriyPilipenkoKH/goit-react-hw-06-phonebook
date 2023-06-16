@@ -4,6 +4,7 @@ import { useAuth } from 'hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
 import { iconActor } from 'utils/svgIcons';
+import Loader from 'components/Loader/Loader';
 
 
 export function UserMenu() {
@@ -14,7 +15,7 @@ export function UserMenu() {
 
   return (
     <>
-      {isFetching && <p> Loading</p >}
+      {isFetching && <Loader/>}
       {isLoggedIn && (
         <StyledWrap>
           { iconActor }

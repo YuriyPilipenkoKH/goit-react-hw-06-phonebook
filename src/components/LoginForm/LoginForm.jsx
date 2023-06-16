@@ -1,19 +1,13 @@
+import Button from 'components/Button/Button';
+import { Input, Label } from 'components/ContactForm/ContactForm.styled';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
+import { FormWrapper, ShowBtn, StyledForm } from './LoginForm.styled';
 // import { authOperations } from '../redux/auth';
 
 
-const styles = {
-  form: {
-    width: 320,
-  },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: 15,
-  },
-};
+
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -41,38 +35,38 @@ export const LoginForm = () => {
   };
 
   return (
-    <div>
-      <h1>Страница логина</h1>
+    <FormWrapper>
+      <h1>LogIn</h1>
 
-      <form onSubmit={handleSubmit} style={styles.form} autoComplete="on">
-        <label style={styles.label}>
-          Почта
-          <input
+      <StyledForm  onSubmit={handleSubmit}  autoComplete="on">
+        <Label >
+          Email
+          <Input
             type='email'
             name="email"
             value={email}
             onChange={handleChange}
-          />
-          
-        </label>
+          />   
+        </Label>
 
-        <label style={styles.label}>
-          Пароль
-          <input
+        <Label  className='pass__label'>
+          Password
+          <Input
             type={show ? 'text' : 'password'}
             name="password"
             value={password}
             onChange={handleChange}
+
           />
-            <button 
+            <ShowBtn 
             type='button' 
             onClick={() => setShow(!show)}>
               {show ? 'Hide' : 'Show'}
-              </button>
-        </label>
+              </ShowBtn>
+        </Label>
 
-        <button type="submit">Войти</button>
-      </form>
-    </div>
+        <Button type="submit">LogIn</Button>
+      </StyledForm>
+    </FormWrapper>
   );
 }

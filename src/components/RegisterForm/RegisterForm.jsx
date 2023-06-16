@@ -1,18 +1,12 @@
+import Button from 'components/Button/Button';
+import { Input, Label } from 'components/ContactForm/ContactForm.styled';
+import { FormWrapper, ShowBtn, StyledForm } from 'components/LoginForm/LoginForm.styled';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
 
 
-const styles = {
-  form: {
-    width: 320,
-  },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: 15,
-  },
-};
+
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -45,42 +39,42 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div>
-      <h1>Страница регистрации</h1>
+    <FormWrapper>
+      <h1>Register</h1>
 
-      <form onSubmit={handleSubmit} style={styles.form} autoComplete="on">
-        <label style={styles.label}>
-          Имя
-          <input type="text" name="name" value={name} onChange={handleChange} />
-        </label>
+      <StyledForm onSubmit={handleSubmit}  autoComplete="on">
+        <Label >
+          Name
+          <Input type="text" name="name" value={name} onChange={handleChange} />
+        </Label>
 
-        <label style={styles.label}>
-          Почта
-          <input
+        <Label >
+          Email
+          <Input
             type="email"
             name="email"
             value={email}
             onChange={handleChange}
           />
-        </label>
+        </Label>
 
-        <label style={styles.label}>
-          Пароль
-          <input
+        <Label >
+          Password
+          <Input
             type={show ? 'text' : 'password'}
             name="password"
             value={password}
             onChange={handleChange}
           />
-            <button 
+            <ShowBtn 
             type='button' 
             onClick={() => setShow(!show)}>
               {show ? 'Hide' : 'Show'}
-              </button>
-        </label>
+              </ShowBtn>
+        </Label>
 
-        <button type="submit">Зарегистрироваться</button>
-      </form>
-    </div>
+        <Button  type="submit">Register</Button>
+      </StyledForm>
+    </FormWrapper>
   );
 }

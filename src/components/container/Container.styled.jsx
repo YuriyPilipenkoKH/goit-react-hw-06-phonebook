@@ -9,6 +9,6 @@ export const MainContainer = styled.div`
     height: 100vh;
 
     background-color: transparent;
-    padding: 16px;
+    padding: 0 16px;
     margin: 0 auto;
 `

@@ -201,9 +201,9 @@ export const EmptySpan = styled.span`
 
 export const Count  = styled.span`
 position: absolute;
-top: 500px;
+top: 485px;
 right: 50%;
-transform: translateX(130px);
+transform: translateX(140px);
 width: 46px;
 display: flex;
 align-items: center;
@@ -217,9 +217,5 @@ font-weight: 800;
 letter-spacing: 1px;
 z-index: 10;
 
-@media screen and (min-width: 768px) {
-  top: 500px;
-  right: 50%; 
-  transform: translateX(140px);
-    }
+
 `

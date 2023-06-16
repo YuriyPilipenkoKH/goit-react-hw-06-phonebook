@@ -1,4 +1,4 @@
-import {  useEffect} from 'react';
+import {   useEffect} from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { refreshUser } from 'redux/auth/operations';
 import { Layout } from 'components/Layout/Layout';
@@ -15,7 +15,10 @@ import { useAuth } from 'hooks/useAuth';
 import Loader from 'components/Loader/Loader';
 
 
-
+// const Home = lazy(() => import('../pages/Home'));
+// const Register = lazy(() => import('../pages/Register'));
+// const Login = lazy(() => import('../pages/Login'));
+// const Phonebook = lazy(() => import('../pages/Phonebook'));
 
 const App = () => {
   const { isRefreshing } = useAuth();

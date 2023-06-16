@@ -1,7 +1,6 @@
 import { Input, Form, Label, ContactFormBtn } from './ContactForm.styled';
 import {iconRedux} from 'utils/svgIcons';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { updateField, resetForm } from 'redux/formSlice';
 import Notiflix from 'notiflix';
 import { addContact } from 'redux/operations';
@@ -29,7 +28,6 @@ const ContactForm = () => {
       number,
     }
 
-
     if (contacts.find((contact) => contact.name.toLowerCase() === newContact.name.toLowerCase())) {
       Notiflix.Notify.failure(`${name} is already in contacts.`);
       return;
@@ -39,7 +37,6 @@ const ContactForm = () => {
     }
 
     dispatch(addContact(newContact))
-
     dispatch(resetForm()); // Reset the form after submission
   };
 

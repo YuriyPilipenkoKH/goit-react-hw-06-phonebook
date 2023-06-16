@@ -90,6 +90,7 @@ export const Form = styled.form`
 
 
 export const Label = styled.label`
+position: relative;
   font-size: 18px;
   font-weight: 500;
   display: flex;

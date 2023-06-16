@@ -10,17 +10,10 @@ export const selectIsLoading = state => state.contacts.isLoading;
 
 
 export const getSortedById = (contactsList, bool)  => { 
-    const arrayOfIds = [] 
-    contactsList.map(contact => {
-    return  arrayOfIds.push(contact.id)
-    } )
-    console.log(arrayOfIds)
-    const short = arrayOfIds.map(id => id.split('') )
-    console.log(short);
-
+ 
     return bool 
-    ? [...contactsList].sort((a, b) => parseInt(a.id) - parseInt(b.id))
-    : [...contactsList].sort((b, a) => parseInt(a.id) - parseInt(b.id)) 
+    ? [...contactsList].sort((a, b) => Number(a.id) - Number(b.id))
+    : [...contactsList].sort((b, a) => Number(a.id) - Number(b.id)) 
   } 
 
 // export const getSortedByDate = (contactsList, bool)  => {
