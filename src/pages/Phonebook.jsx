@@ -21,7 +21,7 @@ export const Phonebook = () => {
   }, [dispatch] )
   
   return (
-    <>
+    <div className="phonebook__wrap">
     <Section title="Phonebook" icon ={iconMphone}>
       <ContactForm  />
 
@@ -35,7 +35,7 @@ export const Phonebook = () => {
       )}
     </Section>
 
-  </>
+  </div>
   )
 }
 

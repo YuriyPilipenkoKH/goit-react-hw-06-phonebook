@@ -9,6 +9,7 @@ padding:  32px 16px;
 border: 4px solid #777;
 border-radius: 12px;
 box-shadow: var(--shadow-four);
+background-color: var(--body-color);
 `
 
 export const StyledForm = styled.form`

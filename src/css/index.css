@@ -332,3 +332,28 @@ img {
   background-position: center;
   background-size: cover;
 }
+
+.login__bg {
+  width: 100%;
+  background-image: url(../img/react-3.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: grid;
+  justify-items: center;
+}
+
+.login__wrap {
+width: 318px;
+
+}
+
+/* .phonebook__wrap {
+  width: 100%;
+  background-image: url(../img/react-3.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: grid;
+  justify-items: center;
+} */
