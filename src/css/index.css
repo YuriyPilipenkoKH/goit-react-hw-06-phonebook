@@ -310,7 +310,7 @@ img {
 
 .iconReactHook{
   transition: all 0.4s;
-  /* fill:var(--react-color); */
+  fill: #555;
 }
 .iconRedux {
   transition: all 0.4s ;
@@ -335,7 +335,7 @@ img {
 
 .login__bg {
   width: 100%;
-  background-image: url(../img/react-3.svg);
+  background-image: url(../img/app-development-bg.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
